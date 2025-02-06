@@ -1,53 +1,25 @@
-# React + TypeScript + Vite
+# visx <img src="public/visc_icon.png" width="25">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+airbnb 팀이 D3.js 와 react 를 사용해 만든 라이브러리인 visx 를 연습하기 위한 사이트입니다.
 
-Currently, two official plugins are available:
+https://airbnb.io/visx
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img src="https://img.shields.io/badge/visx-FF1231?style=for-the-badge&logo=visx&logoColor=white">
+<img src="https://img.shields.io/badge/faker-1A1F71?style=for-the-badge&logo=faker&logoColor=white">
+<img src="https://img.shields.io/badge/D3-F9A03C?style=for-the-badge&logo=D3&logoColor=white">
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📦사용 방법
+저장소 클론
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+git clone https://github.com/h2s0/visx.git
 ```
+1. 저장소 클론
+2. `pnpm i`로 의존성 설치
+3. `pnpm dev` 로 localhost 활성화
 
 
-// 해상도를 기본 해상도에서 보는거랑 1024*768 로 보는거랑 같이 되어야함
+## 🪄 구현 예상 목록
+<img src="public/wordcloudimg.png">
+<img src="public/radialbarsimg.png">
