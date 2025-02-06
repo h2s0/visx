@@ -8,9 +8,6 @@ const createTeamInfo = ( teamCount: number) => {
   let currentScore = 3000;
 
   for ( let i = 0; i < teamCount; i++ ) {
-
-    const scoreDecrement = faker.number.int({ min: 50, max: 150 });
-
     teams.push({
       name: faker.company.buzzNoun(),
       rank: i+1,
