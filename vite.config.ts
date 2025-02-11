@@ -7,6 +7,9 @@ const isDev = env.NODE_ENV === "development";
 
 export default defineConfig({
  plugins: [react()],
+ build: {
+  chunkSizeWarningLimit: 1000,
+ },
  css: {
    devSourcemap: true,
    modules: {
