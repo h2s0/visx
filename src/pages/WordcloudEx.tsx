@@ -17,8 +17,6 @@ const totalTeam = 30;
 // faker js 를 사용하여 더미데이터 생성
 const teamInfo = createTeamInfo(totalTeam);
 
-console.log(teamInfo);
-
 // teamInfo를 사용하여 words 배열 생성
 const words: WordData[] = teamInfo.map(team => ({
   text: team.name,
