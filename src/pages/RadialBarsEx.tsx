@@ -12,6 +12,8 @@ const RadialBarsEx: React.FC = () => {
     width: window.innerWidth,
     height: window.innerHeight
   });
+  // 회전 상태 관리
+  const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
     const newTeams = createTeamInfo(20);
@@ -28,7 +30,13 @@ const RadialBarsEx: React.FC = () => {
     };
   }, []);
 
-  console.log(teams);
+  // 회전 상태를 업데이트하는 useEffect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotation((prevRotation) => prevRotation + 0.01);
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 40;
   const innerRadius = outerRadius / 2;
@@ -43,25 +51,26 @@ const RadialBarsEx: React.FC = () => {
 
   // scaleBand 를 사용하여 각 팀의 이름을 원의 각도로 매핑. 각 원호가 시작하는 각도와 종료 각도를 계산하는 데 사용됨
   const angleScale = useMemo(() => scaleBand({
-      range: [0 , Math.PI * 2],
+      range: [0 , Math.PI * 2 + rotation],
       domain: xDomain,
       padding: 0.1,
-    }),
-    [xDomain, teams.length]
-  );
+    }), [xDomain]);
+
+    // 의존성 배열에 rotation 을 추가하면, 요소의 돌아가는 속도가 달라져서 UI 가 깨지는 이슈가 발생한다. 이유가 뭘까?
+    // rotation 값은 매우 자주 변경되는 값이기 때문에 angleScale 이 자주 재계산되어 angleScale 을 초기 설정 이후 고정한다.
 
   // scaleLinear 를 사용하여 팀의 점수를 원의 반지름으로 매핑, innerRadius, outerRadius 를 결정하는 데 사용됨
   const radiusScale = useMemo(() => scaleLinear({
-      range: [innerRadius, outerRadius],
-      domain:  [0, Math.max(...teams.map(getTeamScore))],
-    }), [innerRadius, outerRadius, yDomain]);
+    range: [innerRadius, outerRadius],
+    domain: yDomain,
+  }), [innerRadius, outerRadius, yDomain]);
 
   const barColor = '#93F9B9';
   const toDegrees = (x: number) => (x * 180) / Math.PI;
 
   return(
     <svg width={dimensions.width} height={dimensions.height}>
-      <Group top={dimensions.height / 2} left={dimensions.width / 2}>
+      <Group top={dimensions.height / 2} left={dimensions.width / 2} >
         {teams.map((team) => {
           const startAngle = angleScale(getTeamName(team));
           const midAngle = startAngle + angleScale.bandwidth() / 2;
@@ -74,7 +83,7 @@ const RadialBarsEx: React.FC = () => {
           const textY = textRadius * Math.sin(midAngle - Math.PI / 2);
 
           return (
-            <g key={team.name}>
+            <g key={team.name} transform={`rotate(${toDegrees(rotation)})`}>
               <Arc
                 startAngle={startAngle}
                 endAngle={endAngle}
