@@ -8,8 +8,6 @@ const RootLayout: React.FC = () => {
         <div className="flex gap-4">
           <Link to='wordcloud'>Wordcloud</Link>
           <Link to='radialbars'>Ridial Bars</Link>
-          <Link to='examples'>Examples</Link>
-          <Link to='new'>New</Link>
         </div>
         <Outlet />
       </main>
