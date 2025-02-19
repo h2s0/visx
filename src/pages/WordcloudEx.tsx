@@ -110,12 +110,6 @@ const WordcloudEx: React.FC = () => {
               initial="initial"
               // Framer motion 에서 animate : 목표 상태 ( 완료 후 위치나 투명도 등 )
               animate={["appear", "floating"]}
-              // Framer motion 에서 transition : 애니메이션 속도 및 효과 설정
-              transition={{
-                duration: 1.5,
-                ease: "easeOut",
-                delay: i * 0.05 // 순차적으로 애니메이션 실행, 단어마다 딜레이
-              }}
             >
               <Text
                 fill={colors[i % colors.length]} // 색상 순환
