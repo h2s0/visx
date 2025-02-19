@@ -1,4 +1,5 @@
 import createTeamInfo from "@/data/createTeamInfo";
+import colorThemes from "@/styles/colorThemes";
 import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Arc } from "@visx/shape";
@@ -14,11 +15,18 @@ const RadialBarsEx: React.FC = () => {
   });
   // 회전 상태 관리
   const [rotation, setRotation] = useState(0);
+  const [selectedTheme, setSelectedTheme] = useState(colorThemes.muted);
 
   useEffect(() => {
-    const newTeams = createTeamInfo(20);
+    setTeams([]);
+    const newTeams = createTeamInfo(20).map((team, i) => ({
+      ...team,
+      color: selectedTheme[i % selectedTheme.length],
+    }));
     setTeams(newTeams);
-    console.log(newTeams);
+  }, [selectedTheme]);
+
+  useEffect(() => {
     const handleResize = () => {
       setDimensions({
         width: window.innerWidth,
@@ -42,8 +50,8 @@ const RadialBarsEx: React.FC = () => {
   const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 40;
   const innerRadius = outerRadius / 2;
 
-  const getTeamName = team => team.name;
-  const getTeamScore = team => team.score;
+  const getTeamName = (team) => team.name;
+  const getTeamScore = (team) => team.score;
 
   // 팀 이름을 기준으로 설정, 원호의 시작 각도를 결정하는 데 사용
   const xDomain = useMemo(() => teams.map(getTeamName).sort(), [teams]);
@@ -69,6 +77,25 @@ const RadialBarsEx: React.FC = () => {
   const toDegrees = (x: number) => (x * 180) / Math.PI;
 
   return(
+    <>
+    <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+      {Object.keys(colorThemes).map((theme) => (
+        <button
+          key={theme}
+          onClick={() => setSelectedTheme(colorThemes[theme])}
+          style={{
+            background: "#fff", // 테마의 첫 번째 색상 표시
+            color: "#333",
+            border: "1px solid #ccc",
+            padding: "5px 10px",
+            cursor: "pointer",
+            borderRadius: "5px",
+          }}
+        >
+          {theme}
+        </button>
+      ))}
+    </div>
     <svg width={dimensions.width} height={dimensions.height}>
       <Group top={dimensions.height / 2} left={dimensions.width / 2} >
         {teams.map((team) => {
@@ -108,6 +135,7 @@ const RadialBarsEx: React.FC = () => {
         })}
       </Group>
       </svg>
+      </>
   )
 }
 
