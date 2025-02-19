@@ -1,9 +1,9 @@
-import createTeamInfo from '@/data/createTeamInfo';
-import { Group } from '@visx/group';
-import { scaleBand, scaleLinear } from '@visx/scale';
-import { Arc } from '@visx/shape';
-import { Text } from '@visx/text';
-import { useEffect, useMemo, useState } from 'react';
+import createTeamInfo from "@/data/createTeamInfo";
+import { Group } from "@visx/group";
+import { scaleBand, scaleLinear } from "@visx/scale";
+import { Arc } from "@visx/shape";
+import { Text } from "@visx/text";
+import { useEffect, useMemo, useState } from "react";
 
 const RadialBarsEx: React.FC = () => {
   const [ teams, setTeams ] = useState([]);
@@ -25,9 +25,9 @@ const RadialBarsEx: React.FC = () => {
         height: window.innerHeight
       });
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -66,7 +66,7 @@ const RadialBarsEx: React.FC = () => {
     domain: yDomain,
   }), [innerRadius, outerRadius, yDomain]);
 
-  const barColor = '#93F9B9';
+  const barColor = "#93F9B9";
   const toDegrees = (x: number) => (x * 180) / Math.PI;
 
   return(
