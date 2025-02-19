@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { selectedTheme } from '@/styles/colorTheme';
+import { selectedTheme } from '@/styles/colorThemes';
 
 const createTeamInfo = (teamCount: number) => {
   const teams = [];
