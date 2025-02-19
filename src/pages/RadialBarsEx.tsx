@@ -18,6 +18,7 @@ const RadialBarsEx: React.FC = () => {
   useEffect(() => {
     const newTeams = createTeamInfo(20);
     setTeams(newTeams);
+    console.log(newTeams);
     const handleResize = () => {
       setDimensions({
         width: window.innerWidth,
@@ -33,7 +34,7 @@ const RadialBarsEx: React.FC = () => {
   // 회전 상태를 업데이트하는 useEffect
   useEffect(() => {
     const interval = setInterval(() => {
-      setRotation((prevRotation) => prevRotation + 0.01);
+      setRotation((prevRotation) => prevRotation + 0.005);
     }, 100);
     return () => clearInterval(interval);
   }, []);
