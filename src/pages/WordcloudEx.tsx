@@ -71,14 +71,14 @@ const WordcloudEx: React.FC = () => {
       transition: {
         duration: 3,
         ease: "easeOut",
-        delay: w.i * 0.05,
+        delay: w.i * 0.1,
       },
     }),
     floating: (w: any) => ({
-      x: [w.x ?? centerX, (w.x ?? centerX) + Math.random() * 10 - 5, w.x ?? centerX],
-      y: [w.y ?? centerY, (w.y ?? centerY) + Math.random() * 10 - 5, w.y ?? centerY],
+      x: [w.x , w.x + Math.random() * 5, w.x],
+      y: [w.y , w.y + Math.random() * 5, w.y],
       transition: {
-        duration: 1.5,
+        duration: 3,
         ease: "easeInOut",
         repeat: Infinity,
         repeatType: "mirror",
