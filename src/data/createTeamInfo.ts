@@ -9,8 +9,11 @@ const createTeamInfo = (teamCount: number) => {
     const score = Math.floor(Math.random() * (maxScore / 100) + 1) * 100;
     
     teams.push({
-      name: `${faker.company.buzzNoun()}-${score}`,
-      score: score
+      // name: `${faker.location.country()}:${score}`,
+      name: `${faker.lorem.word()}${score}`,
+      score: score,
+      country: faker.location.country(),
+      color: faker.color.rgb(),
     });
   }
 
