@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { selectedTheme } from '@/styles/colorTheme';
 
 const createTeamInfo = (teamCount: number) => {
   const teams = [];
@@ -13,7 +14,8 @@ const createTeamInfo = (teamCount: number) => {
       name: `${faker.lorem.word()}${score}`,
       score: score,
       country: faker.location.country(),
-      color: faker.color.rgb(),
+      // color: faker.color.rgb(),
+      color: selectedTheme[i % selectedTheme.length],
     });
   }
 

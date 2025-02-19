@@ -66,7 +66,6 @@ const RadialBarsEx: React.FC = () => {
     domain: yDomain,
   }), [innerRadius, outerRadius, yDomain]);
 
-  const barColor = "#93F9B9";
   const toDegrees = (x: number) => (x * 180) / Math.PI;
 
   return(
@@ -90,14 +89,14 @@ const RadialBarsEx: React.FC = () => {
                 endAngle={endAngle}
                 innerRadius={innerRadius}
                 outerRadius={outerRadius}
-                fill={barColor}
+                fill={team.color}
               />
               <Text
                 x={textX}
                 y={textY}
                 dominantBaseline="end"
                 textAnchor="middle"
-                fill={barColor}
+                fill={team.color}
                 fontSize={20}
                 fontWeight="bold"
                 angle={toDegrees(midAngle)}
