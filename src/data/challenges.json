@@ -1,0 +1,75 @@
+{
+  "total_teams": 120,
+  "problems": [
+      {
+          "name": "Cross-Site Scripting 101",
+          "categories": ["Web", "XSS"],
+          "difficulty": "Easy",
+          "teams_solved": 18,
+          "total_attempts": 240
+      },
+      {
+          "name": "SQL Injection Basics",
+          "categories": ["Web", "SQLi"],
+          "difficulty": "Medium",
+          "teams_solved": 12,
+          "total_attempts": 210
+      },
+      {
+          "name": "Buffer Overflow Intro",
+          "categories": ["Binary Exploitation", "Memory Corruption"],
+          "difficulty": "Hard",
+          "teams_solved": 6,
+          "total_attempts": 150
+      },
+      {
+          "name": "Race Condition Primer",
+          "categories": ["Binary Exploitation", "Logic Bugs"],
+          "difficulty": "Hard",
+          "teams_solved": 4,
+          "total_attempts": 120
+      },
+      {
+          "name": "Secure Code Review",
+          "categories": ["Code Analysis", "Secure Coding"],
+          "difficulty": "Medium",
+          "teams_solved": 24,
+          "total_attempts": 300
+      },
+      {
+          "name": "Android APK Exploit",
+          "categories": ["Reverse Engineering", "Mobile Security"],
+          "difficulty": "Hard",
+          "teams_solved": 9,
+          "total_attempts": 180
+      },
+      {
+          "name": "Network Sniffing Challenge",
+          "categories": ["Network Security", "Sniffing"],
+          "difficulty": "Medium",
+          "teams_solved": 15,
+          "total_attempts": 270
+      },
+      {
+          "name": "Cryptography: Classic Ciphers",
+          "categories": ["Cryptography"],
+          "difficulty": "Easy",
+          "teams_solved": 30,
+          "total_attempts": 360
+      },
+      {
+          "name": "Forensic Log Analysis",
+          "categories": ["Forensics", "Log Analysis"],
+          "difficulty": "Medium",
+          "teams_solved": 22,
+          "total_attempts": 330
+      },
+      {
+          "name": "Cloud Security Threats",
+          "categories": ["Cloud Security", "Configuration"],
+          "difficulty": "Hard",
+          "teams_solved": 10,
+          "total_attempts": 180
+      }
+  ]
+}
