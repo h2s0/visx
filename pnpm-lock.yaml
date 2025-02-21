@@ -68,9 +68,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
-      react-flag-icon-css:
-        specifier: ^1.0.25
-        version: 1.0.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-helmet-async:
         specifier: 1.3.0
         version: 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1847,10 +1844,6 @@ packages:
     resolution: {integrity: sha512-P8WRou2S+oe222TOCHitLy8zj+SIsVJh52VP4lvXkaFVnOFFdoWv1H1Jjvel1aI6NCFOAaeAVm8qrI0odiLcww==}
     engines: {node: '>=6'}
 
-  flag-icon-css@3.5.0:
-    resolution: {integrity: sha512-pgJnJLrtb0tcDgU1fzGaQXmR8h++nXvILJ+r5SmOXaaL/2pocunQo2a8TAXhjQnBpRLPtZ1KCz/TYpqeNuE2ew==}
-    deprecated: The project has been renamed to flag-icons
-
   flat-cache@3.2.0:
     resolution: {integrity: sha512-CYcENa+FtcUKLmhhqyctpclsq7QF38pKjZHsGNiSQF5r4FtoKDWabFDl3hzaEQMvT1LHEysw5twgLvpYYb4vbw==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -3037,13 +3030,6 @@ packages:
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-
-  react-flag-icon-css@1.0.25:
-    resolution: {integrity: sha512-UJll3zpmbZvkwZvu4HI00iGF8ya4OdFzMR5k3cAluIwdHn8l5cB3CPYt+hw0tt7fLKaYIfncxNEO/qTtvBw2qw==}
-    engines: {node: '>=6'}
-    peerDependencies:
-      react: ^0.14 || ^15.0 || ^16.0
-      react-dom: ^0.14 || ^15.0 || ^16.0
 
   react-focus-lock@2.13.6:
     resolution: {integrity: sha512-ehylFFWyYtBKXjAO9+3v8d0i+cnc1trGS0vlTGhzFW1vbFXVUTmR8s2tt/ZQG8x5hElg6rhENlLG1H3EZK0Llg==}
@@ -5836,8 +5822,6 @@ snapshots:
     dependencies:
       semver-regex: 2.0.0
 
-  flag-icon-css@3.5.0: {}
-
   flat-cache@3.2.0:
     dependencies:
       flatted: 3.3.2
@@ -7012,14 +6996,6 @@ snapshots:
       scheduler: 0.23.2
 
   react-fast-compare@3.2.2: {}
-
-  react-flag-icon-css@1.0.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      classnames: 2.5.1
-      flag-icon-css: 3.5.0
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-focus-lock@2.13.6(@types/react@18.3.18)(react@18.3.1):
     dependencies:
