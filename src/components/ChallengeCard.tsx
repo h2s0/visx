@@ -38,7 +38,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
       0
     ];
   };
-  342e04e
+
   return(
     <>
     {challenges.map((challenge, i) => {
