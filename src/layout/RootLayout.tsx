@@ -3,17 +3,16 @@ import { Outlet } from 'react-router-dom';
 
 const RootLayout: React.FC = () => {
   return (
-    <div className='flex flex-col h-screen font-sans'>
-      <main className='flex text-black'>
-        <div className="flex gap-4">
-          <Link to='wordcloud'>Wordcloud</Link>
-          <Link to='radialbars'>Ridial Bars</Link>
-          <Link to='floatingcards'>Floating Cards</Link>
-          <Link to='display'>Display</Link>
-        </div>
-        <Outlet />
-      </main>
-    </div>
+    <main className='flex flex-col text-black font-[LeferiPoint-WhiteObliqueA]'>
+      <div className="flex gap-5 p-5 font-bold">
+        <Link to='wordcloud'>Wordcloud</Link>
+        <Link to='radialbars'>Radial Bars</Link>
+        <Link to='floatingcards'>Floating Cards</Link>
+        <Link to='display'>Display</Link>
+        <Link to='teamInfo'>Team Information</Link>
+      </div>
+      <Outlet />
+    </main>
   )
 }
 
