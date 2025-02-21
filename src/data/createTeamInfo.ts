@@ -13,7 +13,7 @@ const createTeamInfo = (teamCount: number) => {
       // name: `${faker.location.country()}:${score}`,
       name: `${faker.lorem.word()}${score}`,
       score: score,
-      country: faker.location.country(),
+      country: faker.location.countryCode(),
       // color: faker.color.rgb(),
       color: selectedTheme[i % selectedTheme.length],
     });
