@@ -20,9 +20,7 @@ const FloatingCards: React.FC = () => {
   }, [challengesData]);
 
   return(
-    <section className="flex gap-5 overflow-hidden w-full p-5">
       <ChallengeCard challenges={challenges} total={totalTeam} />
-    </section>
   )
 };
 
