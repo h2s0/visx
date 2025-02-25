@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
 interface ChallengeCardProps {
   challenges: Challenge[];
@@ -15,53 +14,34 @@ interface Challenge {
 };
 
 const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  // 각 요소별 y축 움직임을 생성하는 함수
-  const getYMotion = (index: number) => {
-    const amplitude = 20; // 최대 이동 범위
-    return [
-      0,
-      amplitude * Math.pow(-1, index % 2),
-      0,
-      amplitude * Math.pow(-1, (index + 1) % 2),
-      0
-    ];
-  };
+  const doubleChallenges = [...challenges, ...challenges];
 
   return(
-    <>
+    <motion.div
+      className='flex gap-5 border p-5'
+      initial={{ x: 0 }}
+      animate={{ x: "-90%" }}
+      transition={{
+        duration: 10,
+        repeat: Infinity,
+        ease: "linear"
+      }}
+    >
     {challenges.map((challenge, i) => {
       const correctRate = challenge.total_attempts / challenge.teams_solved;
+      const delay = 0.4 * i;
       return (
         <motion.div
           key={i}
           className="flex-col bg-indigo-300 p-5 rounded"
-          initial={{ x: windowWidth, y: 0 }}
-          animate={{
-            x: -windowWidth,
-            y: getYMotion(i) // 각 요소별 y축 움직임
-          }}
+          initial={{ y: "15%" }}
+          animate={{ y: "-15%" }}
           transition={{
-            x: {
-              duration: 35,
-              loop: Infinity,
-              ease: "linear"
-            },
-            y: {
-              duration: 5,
-              loop: Infinity,
-            }
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror",
+            delay: delay,
+            ease: "easeInOut",
           }}
         >
           <p className="font-bold">{challenge.name}</p>
@@ -81,7 +61,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
         </motion.div>
       )
     })}
-    </>
+    </motion.div>
   )
 };
 
