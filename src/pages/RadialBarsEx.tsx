@@ -78,64 +78,64 @@ const RadialBarsEx: React.FC = () => {
 
   return(
     <>
-    <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-      {Object.keys(colorThemes).map((theme) => (
-        <button
-          key={theme}
-          onClick={() => setSelectedTheme(colorThemes[theme])}
-          style={{
-            background: "#fff", // 테마의 첫 번째 색상 표시
-            color: "#333",
-            border: "1px solid #ccc",
-            padding: "5px 10px",
-            cursor: "pointer",
-            borderRadius: "5px",
-          }}
-        >
-          {theme}
-        </button>
-      ))}
-    </div>
-    <svg width={dimensions.width} height={dimensions.height}>
-      <Group top={dimensions.height / 2} left={dimensions.width / 2} >
-        {teams.map((team) => {
-          const startAngle = angleScale(getTeamName(team));
-          const midAngle = startAngle + angleScale.bandwidth() / 2;
-          const endAngle = startAngle + angleScale.bandwidth();
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        {Object.keys(colorThemes).map((theme) => (
+          <button
+            key={theme}
+            onClick={() => setSelectedTheme(colorThemes[theme])}
+            style={{
+              background: "#fff", // 테마의 첫 번째 색상 표시
+              color: "#333",
+              border: "1px solid #ccc",
+              padding: "5px 10px",
+              cursor: "pointer",
+              borderRadius: "5px",
+            }}
+          >
+            {theme}
+          </button>
+        ))}
+      </div>
+      <svg width={dimensions.width} height={dimensions.height}>
+        <Group top={dimensions.height / 2} left={dimensions.width / 2} >
+          {teams.map((team) => {
+            const startAngle = angleScale(getTeamName(team));
+            const midAngle = startAngle + angleScale.bandwidth() / 2;
+            const endAngle = startAngle + angleScale.bandwidth();
 
-          const outerRadius = radiusScale(getTeamScore(team));
+            const outerRadius = radiusScale(getTeamScore(team));
 
-          const textRadius = outerRadius + 4;
-          const textX = textRadius * Math.cos(midAngle - Math.PI / 2);
-          const textY = textRadius * Math.sin(midAngle - Math.PI / 2);
+            const textRadius = outerRadius + 4;
+            const textX = textRadius * Math.cos(midAngle - Math.PI / 2);
+            const textY = textRadius * Math.sin(midAngle - Math.PI / 2);
 
-          return (
-            <g key={team.name} transform={`rotate(${toDegrees(rotation)})`}>
-              <Arc
-                startAngle={startAngle}
-                endAngle={endAngle}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                fill={team.color}
-              />
-              <Text
-                x={textX}
-                y={textY}
-                dominantBaseline="end"
-                textAnchor="middle"
-                fill={team.color}
-                fontSize={20}
-                fontWeight="bold"
-                angle={toDegrees(midAngle)}
-              >
-                {team.name}
-              </Text>
-            </g>
-          );
-        })}
-      </Group>
+            return (
+              <g key={team.name} transform={`rotate(${toDegrees(rotation)})`}>
+                <Arc
+                  startAngle={startAngle}
+                  endAngle={endAngle}
+                  innerRadius={innerRadius}
+                  outerRadius={outerRadius}
+                  fill={team.color}
+                />
+                <Text
+                  x={textX}
+                  y={textY}
+                  dominantBaseline="end"
+                  textAnchor="middle"
+                  fill={team.color}
+                  fontSize={20}
+                  fontWeight="bold"
+                  angle={toDegrees(midAngle)}
+                >
+                  {team.name}
+                </Text>
+              </g>
+            );
+          })}
+        </Group>
       </svg>
-      </>
+  </>
   )
 }
 
