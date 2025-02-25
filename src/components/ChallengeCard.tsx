@@ -18,16 +18,16 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
 
   return(
     <motion.div
-      className='flex gap-5 border p-5'
+      className='flex gap-5 border p-5 absolute'
       initial={{ x: 0 }}
-      animate={{ x: "-90%" }}
+      animate={{ x: "-50%" }}
       transition={{
         duration: 10,
         repeat: Infinity,
         ease: "linear"
       }}
     >
-    {challenges.map((challenge, i) => {
+    {doubleChallenges.map((challenge, i) => {
       const correctRate = challenge.total_attempts / challenge.teams_solved;
       const delay = 0.4 * i;
       return (
