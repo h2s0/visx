@@ -1,5 +1,6 @@
 import createTeamInfo from "@/data/createTeamInfo";
 import { useEffect, useState } from "react";
+import { ReactCountryFlag } from 'react-country-flag';
 
 const TeamInfo: React.FC = () => {
   const [ teams, setTeams ] = useState([]);
@@ -17,7 +18,14 @@ const TeamInfo: React.FC = () => {
           <p>점수: {team.score}</p>
           <p>나라: {team.country}</p>
           <p>색깔: {team.color}</p>
-          <div></div>
+          <ReactCountryFlag
+            svg
+            countryCode={team.countryCode}
+            style={{
+              width: '2em',
+              height: '2em',
+            }}
+          />
         </div>
       ))}
       
