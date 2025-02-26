@@ -1,11 +1,15 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { defineConfig } from "vite";
 import { env } from "process";
+import { defineConfig } from "vite";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const isDev = env.NODE_ENV === "development";
 
 export default defineConfig({
+ base: isDev ? '/' : process.env.VITE_BASE_URL,
  plugins: [react()],
  build: {
   chunkSizeWarningLimit: 1000,
