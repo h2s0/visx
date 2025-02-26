@@ -18,11 +18,11 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
 
   return(
     <motion.div
-      className='flex gap-5 border p-5 absolute'
+      className='flex gap-5 border-4 p-5 absolute'
       initial={{ x: 0 }}
       animate={{ x: "-50%" }}
       transition={{
-        duration: 10,
+        duration: 30,
         repeat: Infinity,
         ease: "linear"
       }}
@@ -34,8 +34,8 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
         <motion.div
           key={i}
           className="flex-col bg-indigo-300 p-5 rounded"
-          initial={{ y: "15%" }}
-          animate={{ y: "-15%" }}
+          initial={{ y: "10%" }}
+          animate={{ y: "-10%" }}
           transition={{
             duration: 2,
             repeat: Infinity,
@@ -57,7 +57,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
           </div>
           <p>{challenge.difficulty}</p>
           <p>{challenge.teams_solved} team Solved!</p>
-          <p>{(challenge.total_attempts / challenge.teams_solved).toFixed(2)}</p>
+          <p>{parseInt(challenge.total_attempts / challenge.teams_solved)}</p>
         </motion.div>
       )
     })}
