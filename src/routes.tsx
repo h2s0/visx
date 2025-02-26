@@ -1,10 +1,10 @@
-import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import RootLayout from '@/layout/RootLayout';
-import WordcloudEx from '@/pages/WordcloudEx';
-import RadialBarsEx from '@/pages/RadialBarsEx';
-import FloatingCards from '@/pages/FloatingCards';
 import Display from '@/pages/Display';
+import FloatingCards from '@/pages/FloatingCards';
+import RadialBarsEx from '@/pages/RadialBarsEx';
 import TeamInfo from '@/pages/TeamInfo';
+import WordcloudEx from '@/pages/WordcloudEx';
+import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
