@@ -9,7 +9,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from 'react-rout
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<RootLayout />}>
+      <Route path='/react-dev/scoreboard/' element={<RootLayout />}>
         <Route path='wordcloud' element={<WordcloudEx />} />
         <Route path='radialbars' element={<RadialBarsEx/>} />
         <Route path='floatingcards' element={<FloatingCards/>} />
