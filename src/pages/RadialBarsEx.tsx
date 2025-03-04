@@ -4,10 +4,14 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Arc } from "@visx/shape";
 import { Text } from "@visx/text";
-import { useEffect, useMemo, useState } from "react";
+import {useEffect, useMemo, useRef, useState } from "react";
+
+type Teams = ReturnType<typeof createTeamInfo>;
+type Team = Teams[number];
 
 const RadialBarsEx: React.FC = () => {
-  const [ teams, setTeams ] = useState([]);
+  const rotateTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [teams, setTeams] = useState<Teams>([]);
   // SVG 의 크기를 동적으로 관리, 브라우저 창 크기가 변경될 때마다 업데이트
   const [dimensions, setDimensions] = useState<{ width: number; height: number; }>({
     width: window.innerWidth,
@@ -19,6 +23,7 @@ const RadialBarsEx: React.FC = () => {
 
   useEffect(() => {
     setTeams([]);
+    setRotation(0);
     const newTeams = createTeamInfo(20).map((team, i) => ({
       ...team,
       color: selectedTheme[i % selectedTheme.length],
@@ -41,17 +46,21 @@ const RadialBarsEx: React.FC = () => {
 
   // 회전 상태를 업데이트하는 useEffect
   useEffect(() => {
-    const interval = setInterval(() => {
+    rotateTimerRef.current = setInterval(() => {
       setRotation((prevRotation) => prevRotation + 0.005);
     }, 100);
-    return () => clearInterval(interval);
+    return () => {
+      if (rotateTimerRef.current) {
+        clearInterval(rotateTimerRef.current);
+      }
+    };
   }, []);
 
   const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 40;
   const innerRadius = outerRadius / 2;
 
-  const getTeamName = (team) => team.name;
-  const getTeamScore = (team) => team.score;
+  const getTeamName = (team: Team) => team.name;
+  const getTeamScore = (team: Team) => team.score;
 
   // 팀 이름을 기준으로 설정, 원호의 시작 각도를 결정하는 데 사용
   const xDomain = useMemo(() => teams.map(getTeamName).sort(), [teams]);
@@ -82,7 +91,7 @@ const RadialBarsEx: React.FC = () => {
         {Object.keys(colorThemes).map((theme) => (
           <button
             key={theme}
-            onClick={() => setSelectedTheme(colorThemes[theme])}
+            onClick={() => setSelectedTheme(colorThemes[theme as keyof typeof colorThemes])}
             style={{
               background: "#fff", // 테마의 첫 번째 색상 표시
               color: "#333",
@@ -100,6 +109,9 @@ const RadialBarsEx: React.FC = () => {
         <Group top={dimensions.height / 2} left={dimensions.width / 2} >
           {teams.map((team) => {
             const startAngle = angleScale(getTeamName(team));
+            if (!startAngle) {
+              return null;
+            }
             const midAngle = startAngle + angleScale.bandwidth() / 2;
             const endAngle = startAngle + angleScale.bandwidth();
 
