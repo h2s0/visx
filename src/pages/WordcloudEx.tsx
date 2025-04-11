@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Text } from "@visx/text";
+import createTeamInfo from "@/data/createTeamInfo";
+import { useTheme } from "@chakra-ui/react";
 import { scaleLinear } from "@visx/scale";
+import { Text } from "@visx/text";
 import Wordcloud from "@visx/wordcloud/lib/Wordcloud";
 import { motion } from "framer-motion";
-import createTeamInfo from "@/data/createTeamInfo";
+import React, { useEffect, useState } from "react";
 
 interface WordData {
   text: string;
@@ -17,8 +18,14 @@ const WordcloudEx: React.FC = () => {
     height: window.innerHeight
   });
 
+  const theme = useTheme();
+
   // 색깔 목록
-  const colors = ["#143059", "#2F6B9A", "#82a6c2"];
+  const colors = [
+    theme.colors.primary[50],
+    theme.colors.primary[300],
+    theme.colors.primary[600]
+  ];
 
   const totalTeam = 30;
   // faker js 를 사용하여 더미데이터 생성, 추후 데이터 통신으로 받아올 것

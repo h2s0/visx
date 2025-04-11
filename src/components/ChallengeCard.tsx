@@ -1,3 +1,4 @@
+import { Divider, Flex, useTheme } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 interface ChallengeCardProps {
@@ -15,6 +16,7 @@ interface Challenge {
 
 const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
   const doubleChallenges = [...challenges, ...challenges];
+  const theme = useTheme();
 
   return(
     <motion.div
@@ -33,7 +35,11 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
       return (
         <motion.div
           key={i}
-          className="flex-col bg-indigo-300 p-5 rounded"
+          className="flex flex-col gap-4 p-6 rounded-2xl border w-[250px]"
+          style={{
+            backgroundColor: theme.colors.primary[900],
+            borderColor: theme.colors.primary[700],
+          }}
           initial={{ y: "10%" }}
           animate={{ y: "-10%" }}
           transition={{
@@ -44,20 +50,35 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
             ease: "easeInOut",
           }}
         >
-          <p className="font-bold">{challenge.name}</p>
-          <div className="flex gap-2 text-xs">
+          <p className="text-lg">
+            {(challenge.name).toUpperCase()}
+          </p>
+          <div className='flex flex-col gap-2'>
           {challenge.categories.map((category, index) => (
-            <span
+            <p
               key={index}
-              className="bg-white rounded p-1"
+              className="bg-white py-1 px-4 rounded-2xl max-w-fit"
+              style={{
+                backgroundColor: theme.colors.primary[400],
+              }}
             >
-              {category}
-            </span>
+              {category.toUpperCase()}
+            </p>
           ))}
           </div>
-          <p>{challenge.difficulty}</p>
-          <p>{challenge.teams_solved} team Solved!</p>
-          <p>{parseInt(challenge.total_attempts / challenge.teams_solved)}</p>
+          <div className='flex flex-col gap-2'>
+            <Divider colorScheme='' />
+            <p>
+              {challenge.difficulty.toUpperCase()}
+            </p>
+            <Divider />
+            <p>{challenge.teams_solved} TEAM SOLVED!</p>
+            <Divider />
+            <p>
+              {parseInt(challenge.total_attempts / challenge.teams_solved)}
+            </p>
+            <Divider />
+          </div>
         </motion.div>
       )
     })}
