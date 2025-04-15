@@ -20,9 +20,11 @@ const FloatingCards: React.FC = () => {
   }, [challengesData]);
 
   return(
-    <section className='mt-20'>
+    <div
+      className='relative w-full h-screen overflow-hidden'
+    >
       <ChallengeCard challenges={challenges} total={totalTeam} />
-    </section>
+    </div>
   )
 };
 
