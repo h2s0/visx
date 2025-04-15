@@ -20,7 +20,8 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
 
   return(
     <motion.div
-      className='flex gap-5 border-4 p-5 absolute'
+      className='flex gap-5 p-5 absolute'
+      style={{ top: "50%", y: "-50%" }}
       initial={{ x: 0 }}
       animate={{ x: "-50%" }}
       transition={{
@@ -75,7 +76,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
             <p>{challenge.teams_solved} TEAM SOLVED!</p>
             <Divider />
             <p>
-              {parseInt(challenge.total_attempts / challenge.teams_solved)}
+              {parseInt(challenge.total_attempts / challenge.teams_solved)}%
             </p>
             <Divider />
           </div>
