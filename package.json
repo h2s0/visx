@@ -25,7 +25,7 @@
     "@visx/shape": "^3.12.0",
     "@visx/text": "latest",
     "@visx/wordcloud": "latest",
-    "axios": "^1.6.8",
+    "axios": "^1.7.9",
     "country-data": "^0.0.31",
     "detect-emoji-support": "^0.1.7",
     "framer-motion": "^12.4.2",
