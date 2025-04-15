@@ -68,7 +68,7 @@ const RadialBarsEx: React.FC = () => {
     };
   }, []);
 
-  const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 40;
+  const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 100;
   const innerRadius = outerRadius / 2;
 
   // 팀 이름을 기준으로 설정, 원호의 시작 각도를 결정하는 데 사용
@@ -135,7 +135,6 @@ const RadialBarsEx: React.FC = () => {
 
       const rotationCenterX = textRadius * Math.cos(midAngle - Math.PI / 2);
       const rotationCenterY = textRadius * Math.sin(midAngle - Math.PI / 2);
-
       
       return {
         name,
@@ -154,8 +153,6 @@ const RadialBarsEx: React.FC = () => {
       }
     }).filter((t): t is ProcessedTeams & { textLines: string[] } => t !== null);
   }, [teams, angleScale, radiusScale]);
-
-
 
   return(
     <>
