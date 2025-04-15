@@ -1,4 +1,4 @@
-import { Divider, Flex, useTheme } from '@chakra-ui/react';
+import { Divider, Flex, Text, useTheme } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 interface ChallengeCardProps {
@@ -17,6 +17,19 @@ interface Challenge {
 const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
   const doubleChallenges = [...challenges, ...challenges];
   const theme = useTheme();
+
+  const difficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'Easy':
+        return theme.colors.green;
+      case 'Medium':
+        return theme.colors.primary[100];
+      case 'Hard':
+        return theme.colors.red;
+      case 'default':
+        return theme.colors.primary[500];
+    }
+  };
 
   return(
     <motion.div
@@ -68,10 +81,10 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
           ))}
           </div>
           <div className='flex flex-col gap-2'>
-            <Divider colorScheme='' />
-            <p>
+            <Divider />
+            <Text color={difficultyColor(challenge.difficulty)}>
               {challenge.difficulty.toUpperCase()}
-            </p>
+            </Text>
             <Divider />
             <p>{challenge.teams_solved} TEAM SOLVED!</p>
             <Divider />
