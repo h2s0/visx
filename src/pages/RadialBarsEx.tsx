@@ -3,11 +3,23 @@ import RadialBarsColors from "@/styles/RadialBarsColors";
 import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Arc } from "@visx/shape";
-import { Text } from "@visx/text";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Teams = ReturnType<typeof createTeamInfo>;
 type Team = Teams[number];
+
+interface ProcessedTeams extends Team {
+  startAngle: number;
+  endAngle: number;
+  midAngle: number;
+  outerRadius: number;
+  textRadius: number;
+  textX: number;
+  textY: number;
+  textLines: string[];
+  rotationCenterX: number;
+  rotationCenterY: number;
+}
 
 const RadialBarsEx: React.FC = () => {
   const rotateTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -20,16 +32,17 @@ const RadialBarsEx: React.FC = () => {
   // 회전 상태 관리
   const [rotation, setRotation] = useState(0);
 
+  // 팀 정보 생성, 색깔 지정
   useEffect(() => {
-    setTeams([]);
     setRotation(0);
-    const newTeams = createTeamInfo(20).map((team, i) => ({
+    const coloredTeams = createTeamInfo(20).map((team, i) => ({
       ...team,
       color: RadialBarsColors[i % RadialBarsColors.length],
     }));
-    setTeams(newTeams);
+    setTeams(coloredTeams);
   }, []);
 
+  // 브라우저 리사이즈 감지해 SVG 크기 업데이트
   useEffect(() => {
     const handleResize = () => {
       setDimensions({
@@ -58,13 +71,10 @@ const RadialBarsEx: React.FC = () => {
   const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 - 40;
   const innerRadius = outerRadius / 2;
 
-  const getTeamName = (team: Team) => team.name;
-  const getTeamScore = (team: Team) => team.score;
-
   // 팀 이름을 기준으로 설정, 원호의 시작 각도를 결정하는 데 사용
-  const xDomain = useMemo(() => teams.map(getTeamName).sort(), [teams]);
+  const xDomain = useMemo(() => teams.map(team => team.name).sort(), [teams]);
   // 점수의 최대값을 계산하여 outerRadius 의 최대 범위를 설정하는 데 사용
-  const yDomain = useMemo(() => [0, Math.max(...teams.map(getTeamScore))], [teams]);
+  const yDomain = useMemo(() => [0, Math.max(...teams.map(team => team.score))], [teams]);
 
   // scaleBand 를 사용하여 각 팀의 이름을 원의 각도로 매핑. 각 원호가 시작하는 각도와 종료 각도를 계산하는 데 사용됨
   const angleScale = useMemo(() => scaleBand({
@@ -84,45 +94,102 @@ const RadialBarsEx: React.FC = () => {
 
   const toDegrees = (x: number) => (x * 180) / Math.PI;
 
+  const fontSize = 20;
+
+  // 글자 자르는 함수
+  const splitText = (text: string, maxLen: number): string[] => {
+    const result = [];
+    for (let i = 0; i < text.length; i += maxLen) {
+      result.push(text.slice(i, i + maxLen));
+    }
+    return result;
+  };
+
+  const processedTeams: ProcessedTeams[] = useMemo(() => {
+    return teams.map((team) => {
+      const name = team.name;
+      const score = team.score;
+      const color = team.color;
+
+      const startAngle = angleScale(name as string);
+      if (startAngle == null) return null;
+
+      const angleWidth = angleScale.bandwidth();
+      const midAngle = startAngle + angleScale.bandwidth() / 2;
+      const endAngle = startAngle + angleScale.bandwidth();
+      const outerRadius = radiusScale(team.score);
+      const textRadius = outerRadius + 4;
+      
+      const arcLength = angleWidth * textRadius;
+      
+      const approxTextWidth = name.length * fontSize * 0.6;
+      const needsWrap = approxTextWidth > arcLength;
+      const textLines = needsWrap
+      ? splitText(name, Math.floor(name.length / 2))
+      : [name];
+
+      const totalHeight = textLines.length * fontSize * 1.2;
+      
+      const textX = textRadius * Math.cos(midAngle - Math.PI / 2);
+      const textY = textRadius * Math.sin(midAngle - Math.PI / 2) - totalHeight / 2;
+
+      const rotationCenterX = textRadius * Math.cos(midAngle - Math.PI / 2);
+      const rotationCenterY = textRadius * Math.sin(midAngle - Math.PI / 2);
+
+      
+      return {
+        name,
+        score,
+        color,
+        startAngle,
+        midAngle,
+        endAngle,
+        outerRadius,
+        textX,
+        textY,
+        textRadius,
+        textLines,
+        rotationCenterX,
+        rotationCenterY,
+      }
+    }).filter((t): t is ProcessedTeams & { textLines: string[] } => t !== null);
+  }, [teams, angleScale, radiusScale]);
+
+
+
   return(
     <>
       <svg width={dimensions.width} height={dimensions.height}>
         <Group top={dimensions.height / 2} left={dimensions.width / 2} >
-          {teams.map((team) => {
-            const startAngle = angleScale(getTeamName(team));
-            if (!startAngle) {
-              return null;
-            }
-            const midAngle = startAngle + angleScale.bandwidth() / 2;
-            const endAngle = startAngle + angleScale.bandwidth();
-
-            const outerRadius = radiusScale(getTeamScore(team));
-
-            const textRadius = outerRadius + 4;
-            const textX = textRadius * Math.cos(midAngle - Math.PI / 2);
-            const textY = textRadius * Math.sin(midAngle - Math.PI / 2);
-
+          {processedTeams.map((team) => {
             return (
               <g key={team.name} transform={`rotate(${toDegrees(rotation)})`}>
                 <Arc
-                  startAngle={startAngle}
-                  endAngle={endAngle}
+                  startAngle={team.startAngle}
+                  endAngle={team.endAngle}
                   innerRadius={innerRadius}
-                  outerRadius={outerRadius}
+                  outerRadius={team.outerRadius}
                   fill={team.color}
                 />
-                <Text
-                  x={textX}
-                  y={textY}
-                  dominantBaseline="end"
+                <text
+                  x={team.rotationCenterX}
+                  y={team.rotationCenterY}
+                  transform={`rotate(${toDegrees(team.midAngle)}, ${team.rotationCenterX}, ${team.rotationCenterY})`}
                   textAnchor="middle"
                   fill={team.color}
-                  fontSize={20}
+                  fontSize={fontSize}
                   fontWeight="bold"
-                  angle={toDegrees(midAngle)}
                 >
-                  {team.name}
-                </Text>
+                  {team.textLines.map((line, i) => (
+                    <tspan
+                      key={i}
+                      x={team.textX}
+                      y={team.textY + (i - (team.textLines.length - 1) / 2) * fontSize * 1.2}
+                    >
+                      {line}
+                    </tspan>
+                  ))}
+                </text>
               </g>
             );
           })}
