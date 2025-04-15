@@ -58,7 +58,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
           {challenge.categories.map((category, index) => (
             <p
               key={index}
-              className="bg-white py-1 px-4 rounded-2xl max-w-fit"
+              className="bg-white py-1 px-4 rounded-full max-w-fit text-[0.9375rem]"
               style={{
                 backgroundColor: theme.colors.primary[400],
               }}
@@ -76,7 +76,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
             <p>{challenge.teams_solved} TEAM SOLVED!</p>
             <Divider />
             <p>
-              {parseInt(challenge.total_attempts / challenge.teams_solved)}%
+              CORRECT RATE : {parseInt(challenge.total_attempts / challenge.teams_solved)}%
             </p>
             <Divider />
           </div>
