@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   console.log(env);
 
   return {
-    base: env.VITE_BASE_URL,
+    base: '/',
     plugins: [react()],
     build: {
       chunkSizeWarningLimit: 1000,
@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      allowedHosts: ["https://ctf-scoreboard.padev.surf", "https://scoreboard.padev.surf", "ctf-scoreboard.padev.surf", "scoreboard.padev.surf", "ctf-scoreboard.padev.surf/", "scoreboard.padev.surf/"],
       host: '0.0.0.0',
       port: 5173,
       watch: {
