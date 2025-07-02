@@ -90,7 +90,7 @@ function RankTable({ teams, ...props }) {
           </Tr>
         </Thead>
         <Tbody>
-          {teams?.map((team, idx) => {
+          {teams?.slice(0, 10).map((team, idx) => {
             if (team === null) {
               return (
                 <Tr key={`${team}${idx}`}>
