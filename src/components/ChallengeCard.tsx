@@ -10,7 +10,7 @@ interface Challenge {
   tag: string[];
   // difficulty: string;
   solves: number;
-  flat_try: number;
+  flag_try: number;
 }
 
 const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
@@ -43,8 +43,9 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
       }}
     >
     {doubleChallenges.map((challenge, i) => {
-      const correctRate = challenge.flat_try / challenge.solves;
+      const correctRate = Math.floor((challenge.solves / challenge.flag_try) * 100);
       const delay = 0.4 * i;
+
       return (
         <motion.div
           key={i}
@@ -88,7 +89,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
             <p>{challenge.solves} TEAM SOLVED!</p>
             <Divider />
             <p>
-              CORRECT RATE : {parseInt(challenge.flat_try / challenge.solves)}%
+              CORRECT RATE : {correctRate}%
             </p>
             <Divider />
           </div>
