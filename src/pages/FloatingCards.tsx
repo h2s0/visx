@@ -1,29 +1,30 @@
 import ChallengeCard from '@/components/ChallengeCard';
-import challengesData from "@/data/challenges";
 import { useEffect, useState } from "react";
 
-interface challenges {
+interface Challenge {
   name: string;
-  categories: string[];
-  difficulty: string;
-  teams_solved: number;
-  total_attempts: number;
+  tag: string[];
+  // difficulty: string;
+  solves: number;
+  flag_try: number;
 }
 
-const FloatingCards: React.FC = () => {
-  const [challenges, setChallenges] = useState<challenges[]>([]);
-  const [totalTeam, setTotalTeam] = useState<number>(0);
+interface FloatingCardsProps {
+  data?: Challenge[];
+}
+
+const FloatingCards: React.FC<FloatingCardsProps> = ({ data = [] }) => {
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
 
   useEffect(() => {
-    setChallenges(challengesData.problems);
-    setTotalTeam(challengesData.total_teams);
-  }, [challengesData]);
+    setChallenges(data);
+  }, [data]);
 
   return(
     <div
       className='relative w-full h-screen overflow-hidden'
     >
-      <ChallengeCard challenges={challenges} total={totalTeam} />
+      <ChallengeCard challenges={challenges} />
     </div>
   )
 };
