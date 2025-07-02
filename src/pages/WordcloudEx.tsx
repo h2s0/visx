@@ -41,12 +41,14 @@ const WordcloudEx: React.FC<WordcloudExProps> = ({data}) => {
     theme.colors.primary[600]
   ];
 
+  // 화면에 보여줄 데이터 만들기
   const words: WordData[] = data.map(team => ({
     text: team.teamName,
     country: team.country,
     value: team.currentScore,
   }));
 
+  // 팀의 점수에 따른 폰트 사이즈 조절
   const max = Math.max(...words.map(word => word.value));
   const min = Math.min(...words.map(word => word.value));
 
