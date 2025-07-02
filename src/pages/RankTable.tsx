@@ -163,7 +163,7 @@ function RankTable({ teams, ...props }) {
                   p={0}
                   textAlign="center"
                 >
-                  {formatDate(team.submissionTime)}
+                  {formatDate(team.last_update)}
                 </Td>
               </Tr>
             );
