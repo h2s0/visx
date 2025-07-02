@@ -9,15 +9,29 @@ import React, { useEffect, useState } from "react";
 interface WordData {
   text: string;
   value: number;
+  country: string;
 }
 
-const WordcloudEx: React.FC = () => {
+interface WordcloudExProps {
+  data: TeamData[];
+}
+
+interface TeamData {
+  country: string;
+  currentScore: number;
+  last_update: string;
+  rank: number;
+  teamName: string;
+}
+
+const WordcloudEx: React.FC<WordcloudExProps> = ({data}) => {
   // 창 크기 상태 관리
   const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
     width: window.innerWidth,
     height: window.innerHeight
   });
 
+  // 색깔 static 해놓은거 theme 에 추가하기
   const theme = useTheme();
 
   // 색깔 목록
@@ -27,14 +41,10 @@ const WordcloudEx: React.FC = () => {
     theme.colors.primary[600]
   ];
 
-  const totalTeam = 30;
-  // faker js 를 사용하여 더미데이터 생성, 추후 데이터 통신으로 받아올 것
-  const teamInfo = createTeamInfo(totalTeam);
-
-  // teamInfo를 사용하여 words 배열 생성
-  const words: WordData[] = teamInfo.map(team => ({
-    text: team.name,
-    value: team.score,
+  const words: WordData[] = data.map(team => ({
+    text: team.teamName,
+    country: team.country,
+    value: team.currentScore,
   }));
 
   const max = Math.max(...words.map(word => word.value));
@@ -42,7 +52,7 @@ const WordcloudEx: React.FC = () => {
 
   const fontSizeScale = scaleLinear({
     domain: [min, max],
-    range: [10, 100],
+    range: [50, 200],
   });
 
   // 창 크기 변경 감지
@@ -86,7 +96,7 @@ const WordcloudEx: React.FC = () => {
       y: [w.y , w.y + Math.random() * 5, w.y],
       transition: {
         duration: 3,
-        ease: "easeInOut",
+        ease: ["easeInOut", "easeInOut"],
         repeat: Infinity,
         repeatType: "mirror",
       },
@@ -99,7 +109,7 @@ const WordcloudEx: React.FC = () => {
         words={words} // 단어 리스트
         width={dimensions.width}
         height={dimensions.height}
-        fontSize={(d: WordData) => fontSizeScale(d.value)} // 단어 크기 조절
+        fontSize={(d) => fontSizeScale(d.value)} // 단어 크기 조절
         font="Impact"
         padding={2}
         spiral="archimedean" // 단어 배치 방식
