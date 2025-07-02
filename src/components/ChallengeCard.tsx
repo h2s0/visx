@@ -3,18 +3,17 @@ import { motion } from 'framer-motion';
 
 interface ChallengeCardProps {
   challenges: Challenge[];
-  total: number;
 };
 
 interface Challenge {
   name: string;
-  categories: string[];
-  difficulty: string;
-  teams_solved: number;
-  total_attempts: number;
-};
+  tag: string[];
+  // difficulty: string;
+  solves: number;
+  flat_try: number;
+}
 
-const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
+const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
   const doubleChallenges = [...challenges, ...challenges];
   const theme = useTheme();
 
@@ -44,7 +43,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
       }}
     >
     {doubleChallenges.map((challenge, i) => {
-      const correctRate = challenge.total_attempts / challenge.teams_solved;
+      const correctRate = challenge.flat_try / challenge.solves;
       const delay = 0.4 * i;
       return (
         <motion.div
@@ -68,7 +67,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
             {(challenge.name).toUpperCase()}
           </p>
           <div className='flex flex-col gap-2'>
-          {challenge.categories.map((category, index) => (
+          {challenge.tag.map((tag, index) => (
             <p
               key={index}
               className="bg-white py-1 px-4 rounded-full max-w-fit text-[0.9375rem]"
@@ -76,20 +75,20 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges, total }) => {
                 backgroundColor: theme.colors.primary[400],
               }}
             >
-              {category.toUpperCase()}
+              {tag.toUpperCase()}
             </p>
           ))}
           </div>
           <div className='flex flex-col gap-2'>
             <Divider />
-            <Text color={difficultyColor(challenge.difficulty)}>
+            {/* {<Text color={difficultyColor(challenge.difficulty)}>
               {challenge.difficulty.toUpperCase()}
-            </Text>
+            </Text>} */}
             <Divider />
-            <p>{challenge.teams_solved} TEAM SOLVED!</p>
+            <p>{challenge.solves} TEAM SOLVED!</p>
             <Divider />
             <p>
-              CORRECT RATE : {parseInt(challenge.total_attempts / challenge.teams_solved)}%
+              CORRECT RATE : {parseInt(challenge.flat_try / challenge.solves)}%
             </p>
             <Divider />
           </div>
