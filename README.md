@@ -1,5 +1,4 @@
-# 📈 ctf-scoreboard
-
+# 📈 ctf-visuals
 ctf 대회에 실물 현장에서 필요한 시각적 요소 사이트입니다.<br />
 참여자 점수, 문제 정보 등 전반적인 대회에 대한 정보들을 애니메이션과 함께 보여줍니다.
 
@@ -39,5 +38,4 @@ git clone https://github.com/h2s0/visx.git
 
 <br />
 
-## 🖥 구현 화면 확인
-https://cdn.t80.im/react-dev/scoreboard/
+## [🖥 구현 화면 확인](https://khs.v-room.kr/) < 클릭
