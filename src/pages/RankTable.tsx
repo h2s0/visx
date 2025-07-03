@@ -104,7 +104,7 @@ function RankTable({ teams, ...props }) {
                   color="white"
                   borderBottomColor="#161318"
                   fontSize="1.1rem"
-                  h="3.2rem"
+                  h="3.5rem"
                   p={0}
                   textAlign="center"
                 >
@@ -114,7 +114,7 @@ function RankTable({ teams, ...props }) {
                   color="white"
                   borderBottomColor="#161318"
                   fontSize="1.1rem"
-                  h="3.2rem"
+                  h="3.5rem"
                   p={0}
                   textAlign="center"
                 >
@@ -149,7 +149,7 @@ function RankTable({ teams, ...props }) {
                   color="white"
                   borderBottomColor="#161318"
                   fontSize="1.1rem"
-                  h="3.2rem"
+                  h="3.5rem"
                   p={0}
                   textAlign="center"
                 >
@@ -159,7 +159,7 @@ function RankTable({ teams, ...props }) {
                   color="white"
                   borderBottomColor="#161318"
                   fontSize="1.1rem"
-                  h="3.2rem"
+                  h="3.5rem"
                   p={0}
                   textAlign="center"
                 >
