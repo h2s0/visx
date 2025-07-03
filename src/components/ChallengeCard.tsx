@@ -1,4 +1,4 @@
-import { Divider, Flex, Text, useTheme } from '@chakra-ui/react';
+import { Divider, useTheme } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 interface ChallengeCardProps {
@@ -64,7 +64,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
             ease: "easeInOut",
           }}
         >
-          <p className="text-lg">
+          <p className="text-lg font-bold">
             {(challenge.name).toUpperCase()}
           </p>
           <div className='flex flex-col gap-2'>
