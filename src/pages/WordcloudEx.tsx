@@ -1,4 +1,3 @@
-import createTeamInfo from "@/data/createTeamInfo";
 import { useTheme } from "@chakra-ui/react";
 import { scaleLinear } from "@visx/scale";
 import { Text } from "@visx/text";
@@ -54,7 +53,7 @@ const WordcloudEx: React.FC<WordcloudExProps> = ({data}) => {
 
   const fontSizeScale = scaleLinear({
     domain: [min, max],
-    range: [50, 200],
+    range: [50, 170],
   });
 
   // 창 크기 변경 감지
@@ -112,7 +111,7 @@ const WordcloudEx: React.FC<WordcloudExProps> = ({data}) => {
         width={dimensions.width}
         height={dimensions.height}
         fontSize={(d) => fontSizeScale(d.value)} // 단어 크기 조절
-        font="Impact"
+        font="NEXON Lv1 Gothic OTF"
         padding={2}
         spiral="archimedean" // 단어 배치 방식
         rotate={() => 0} // 단어 회전 없음
@@ -134,7 +133,8 @@ const WordcloudEx: React.FC<WordcloudExProps> = ({data}) => {
                 fill={colors[i % colors.length]} // 색상 순환
                 textAnchor="middle"
                 fontSize={w.size}
-                fontFamily="Impact"
+                fontFamily="NEXON Lv1 Gothic OTF"
+                fontWeight="bold"
               >
                 {w.text}
               </Text>
