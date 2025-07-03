@@ -4,6 +4,27 @@
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+@import url('https://cdn.jsdelivr.net/gh/linecorp/line-seed-font@main/Web/WOFF2/LINESeedKR-Rg.woff2');
+
+@font-face {
+  font-family: 'LINESeedKR';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://cdn.jsdelivr.net/gh/linecorp/line-seed-font@main/Web/WOFF2/LINESeedKR-Rg.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'LINESeedKR';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/gh/linecorp/line-seed-font@main/Web/WOFF2/LINESeedKR-Bd.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'LINESeedKR';
+  font-style: normal;
+  font-weight: 900;
+  src: url('https://cdn.jsdelivr.net/gh/linecorp/line-seed-font@main/Web/WOFF2/LINESeedKR-EB.woff2') format('woff2');
+}
+
 /* font */
 
 @font-face {
@@ -50,4 +71,17 @@
 
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
+}
+
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF%20Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF%20ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
 }
