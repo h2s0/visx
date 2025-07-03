@@ -1,5 +1,5 @@
 import RadialBarsColors from "@/styles/RadialBarsColors";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Arc } from "@visx/shape";
@@ -24,7 +24,6 @@ interface RadialBarsExProps {
 
 interface TeamData {
   country: string;
-  countryCode: string;
   currentScore: number;
   last_update: string;
   rank: number;
@@ -45,6 +44,7 @@ const RadialBarsEx: React.FC<RadialBarsExProps> = ({data}) => {
     justifyContent="center"
     zIndex={1000}
     pointerEvents="none"
+    background="radial-gradient(circle at center, #2D004D, #000000)"
   >
     <Box
       as="span"
@@ -54,6 +54,7 @@ const RadialBarsEx: React.FC<RadialBarsExProps> = ({data}) => {
       color="white"
       lineHeight={1.3}
       pointerEvents="auto"
+      fontFamily='NEXON Lv1 Gothic OTF'
     >
       5팀 이상의 점수가 기록될 경우 표시됩니다.<br />
       Displayed when scores have been recorded for five or more teams.
