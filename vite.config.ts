@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      allowedHosts: ["https://ctf-scoreboard.padev.surf", "https://scoreboard.padev.surf", "ctf-scoreboard.padev.surf", "scoreboard.padev.surf", "ctf-scoreboard.padev.surf/", "scoreboard.padev.surf/"],
+      allowedHosts: ["https://ctf-scoreboard.padev.surf", "https://scoreboard.padev.surf", "ctf-scoreboard.padev.surf", "scoreboard.padev.surf", "ctf-scoreboard.padev.surf/", "scoreboard.padev.surf/", "1234.padev.surf" ],
       host: '0.0.0.0',
       port: 5173,
       watch: {
