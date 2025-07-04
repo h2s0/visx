@@ -118,6 +118,7 @@ const RootLayout: React.FC = () => {
         
         return nextIndex;
       });
+      fetchAllGroupData();
     }, 10000); // 10초마다 변경
 
     return () => clearInterval(interval);
