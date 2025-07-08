@@ -43,7 +43,11 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenges }) => {
       }}
     >
     {doubleChallenges.map((challenge, i) => {
-      const correctRate = Math.floor((challenge.solves / challenge.flag_try) * 100);
+      const solves = Number(challenge.solves) || 0;
+      const flagTry = Number(challenge.flag_try) || 0;
+      const correctRate = flagTry === 0 
+      ? 0
+      : Math.floor((solves / flagTry) * 100);
       const delay = 0.4 * i;
 
       return (
