@@ -94,9 +94,9 @@ const RootLayout: React.FC = () => {
   // 컴포넌트 목록 정의
   const getComponents = () => [
     <WordcloudEx data={currentTeams} />,
-    <RadialBarsEx data={currentTeams} />,
-    <FloatingCards data={currentChallenges} />,
-    <RankTable teams={currentTeams} />
+    // <RadialBarsEx data={currentTeams} />,
+    <RankTable teams={currentTeams} />,
+    <FloatingCards data={currentChallenges} />
   ];
   
   // 현재 표시할 컴포넌트
@@ -106,10 +106,10 @@ const RootLayout: React.FC = () => {
   useEffect(() => {
     fetchAllGroupData();
     
-    // 10초마다 컴포넌트 변경, 한 사이클(4개 컴포넌트) 후 그룹 변경
+    // 10초마다 컴포넌트 변경, 한 사이클(3개 컴포넌트) 후 그룹 변경
     const interval = setInterval(() => {
       setComponentIndex(prevIndex => {
-        const nextIndex = (prevIndex + 1) % 4;
+        const nextIndex = (prevIndex + 1) % 3;
         
         // 컴포넌트 사이클이 완료되면 그룹 변경
         if (nextIndex === 0) {
